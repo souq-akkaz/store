@@ -1,1 +1,1 @@
-# auth
+# Akkaz store service
