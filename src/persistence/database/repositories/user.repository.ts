@@ -13,6 +13,7 @@ class UserRepo extends Model<User, IBuildUser> {
     });
   }
 
+  static modelName = 'user';
   static initModel(sequelize: Sequelize) {
     return UserRepo.init({
       id: {
@@ -34,7 +35,7 @@ class UserRepo extends Model<User, IBuildUser> {
         sequelize,
         tableName: User.tableName,
         schema: config.db.schema,
-        modelName: User.tableName,
+        modelName: UserRepo.modelName,
         timestamps: false
       });
   }

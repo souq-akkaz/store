@@ -21,6 +21,7 @@ export class Product {
   brand?: Brand;
   category?: Category;
   
+  static modelName = 'product';
   static tableName = 'Product';
   static build(data: IBuildProduct): Product {
     const result = new Product();

@@ -12,6 +12,7 @@ export class ProductController {
     @inject(TYPES.ProductService)
     private _productService: ProductService
   ) {}
+
   search = async (req: Request, res: Response) => {
     const pagination = getPaginationObject(req.query);
     const currentUser = getCurrentUser(req.headers);

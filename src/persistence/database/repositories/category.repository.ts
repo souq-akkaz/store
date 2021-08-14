@@ -12,6 +12,7 @@ class CategoryRepo extends Model<Category, IBuildCategory> {
     });
   }
 
+  static modelName = 'category';
   static initModel(sequelize: Sequelize) {
     return CategoryRepo.init({
       id: {
@@ -29,13 +30,13 @@ class CategoryRepo extends Model<Category, IBuildCategory> {
         sequelize,
         tableName: Category.tableName,
         schema: config.db.schema,
-        modelName: Category.tableName,
+        modelName: CategoryRepo.modelName,
         timestamps: false
       });
   }
 
   static associate(models) {
-    const productRepo = models[ProductRepo.tableName] as typeof ProductRepo;
+    const productRepo = models[ProductRepo.modelName] as typeof ProductRepo;
     this.hasMany(productRepo, { foreignKey: 'categoryId' });
   }
 }

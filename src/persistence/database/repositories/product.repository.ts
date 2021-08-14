@@ -18,6 +18,7 @@ class ProductRepo extends Model<Product, IBuildProduct> {
     });
   }
 
+  static modelName = 'product';
   static initModel(sequelize: Sequelize) {
     return ProductRepo.init({
       id: {
@@ -31,7 +32,7 @@ class ProductRepo extends Model<Product, IBuildProduct> {
         allowNull: false
       },
       price: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         allowNull: false
       },
       brandId: {
@@ -47,14 +48,14 @@ class ProductRepo extends Model<Product, IBuildProduct> {
         sequelize,
         tableName: Product.tableName,
         schema: config.db.schema,
-        modelName: Product.tableName,
+        modelName: ProductRepo.modelName,
         timestamps: false
       });
   }
 
   static associate(models) {
-    const categoryRepo = models[CategoryRepo.tableName] as typeof CategoryRepo;
-    const brandRepo = models[BrandRepo.tableName] as typeof BrandRepo;
+    const categoryRepo = models[CategoryRepo.modelName] as typeof CategoryRepo;
+    const brandRepo = models[BrandRepo.modelName] as typeof BrandRepo;
     this.belongsTo(categoryRepo, { foreignKey: 'categoryId' });
     this.belongsTo(brandRepo, { foreignKey: 'brandId' });
   }

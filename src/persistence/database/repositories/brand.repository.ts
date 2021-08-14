@@ -12,6 +12,7 @@ class BrandRepo extends Model<Brand, IBuildBrand> {
     });
   }
 
+  static modelName = 'brand';
   static initModel(sequelize: Sequelize) {
     return BrandRepo.init({
       id: {
@@ -29,13 +30,13 @@ class BrandRepo extends Model<Brand, IBuildBrand> {
         sequelize,
         tableName: Brand.tableName,
         schema: config.db.schema,
-        modelName: Brand.tableName,
+        modelName: BrandRepo.modelName,
         timestamps: false
       });
   }
 
   static associate(models) {
-    const productRepo = models[ProductRepo.tableName] as typeof ProductRepo;
+    const productRepo = models[ProductRepo.modelName] as typeof ProductRepo;
     this.hasMany(productRepo, { foreignKey: 'brandId' });
   }
 }
