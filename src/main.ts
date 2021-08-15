@@ -7,6 +7,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import { Stan } from 'node-nats-streaming';
 
+import diContainer from './di/di-container';
 import { TYPES } from './di/injection-tokens';
 import establishMessageBrokerConection from './nats/connect';
 diContainer
@@ -17,7 +18,6 @@ import config from './config/config';
 import database from './persistence/database/database';
 import errorGlobalHandlerMiddleware from './middlewares/global-error.middleware';
 import setupRoutes from './routers';
-import diContainer from './di/di-container';
 import { ProductService } from './product/services/product.service';
 
 dotenv.config({ path: process.env.NODE_ENV == 'production' ? '.env' : 'dev.env' });

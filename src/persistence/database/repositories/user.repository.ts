@@ -5,11 +5,17 @@ import { IBuildUser } from '../../../user/models';
 import { User } from '../../../user/models';
 
 class UserRepo extends Model<User, IBuildUser> {
+  id: number;
+  email: string;
+  username: string;
+  balance: number;
+
   toModel(): User {
     return User.build({
-      email: this.getDataValue('email') as string,
-      username: this.getDataValue('username') as string,
-      id: this.getDataValue('id') as number
+      email: this.email,
+      username: this.username,
+      id: this.id,
+      balance: this.balance
     });
   }
 
@@ -19,7 +25,6 @@ class UserRepo extends Model<User, IBuildUser> {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true,
         allowNull: false
       },
       username: {
@@ -29,6 +34,10 @@ class UserRepo extends Model<User, IBuildUser> {
       email: {
         type: DataTypes.STRING(1000),
         allowNull: false
+      },
+      balance: {
+        type: DataTypes.FLOAT,
+        allowNull: true
       }
     },
       {

@@ -53,7 +53,7 @@ export class ProductService {
       pageSize: searchCriteria.pageSize,
       searchTerm: searchCriteria.searchTerm
     });
-
+    console.log(criteria.toSequelizeFindOption());
     const { rows, count } = await ProductRepo.findAndCountAll({
       ...criteria.toSequelizeFindOption(),
       include: [
