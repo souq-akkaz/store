@@ -23,6 +23,7 @@
     "lodash": "^4.17.21",
     "morgan": "^1.10.0",
     "mysql2": "^2.2.5",
+    "node-nats-streaming": "^0.3.2",
     "ramda": "^0.27.1",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.6.5",

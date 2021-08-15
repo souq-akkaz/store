@@ -5,6 +5,13 @@ import cors from 'cors';
 import compression from 'compression';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import { Stan } from 'node-nats-streaming';
+
+import { TYPES } from './di/injection-tokens';
+import establishMessageBrokerConection from './nats/connect';
+diContainer
+  .bind<Stan>(TYPES.StanClient)
+  .toConstantValue(establishMessageBrokerConection());
 
 import config from './config/config';
 import database from './persistence/database/database';
@@ -27,6 +34,8 @@ const establishDatabaseConnection = async () => {
   await database.sequelize.sync({ alter: true });
 };
 
+
+
 const bootstrap = async () => {
   const app = express();
 
@@ -41,6 +50,8 @@ const bootstrap = async () => {
   app.use(compression());
 
   await establishDatabaseConnection();
+
+  const stanClient = diContainer.get(TYPES.StanClient) as Stan;
   const productService = diContainer.resolve(ProductService);
   productService.insertPreSetData();
 
